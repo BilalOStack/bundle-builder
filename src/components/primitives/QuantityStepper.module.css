@@ -1,0 +1,75 @@
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.button {
+  display: grid;
+  place-items: center;
+  background: var(--c-stepper-bg);
+  color: var(--c-stepper-fg);
+  border: 2px solid var(--c-stepper-bg);
+  border-radius: var(--r-stepper);
+  flex: none;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--c-stepper-bg-hover);
+  border-color: var(--c-stepper-bg-hover);
+}
+
+/* A stepper sitting at its minimum reads as an outline, not a filled button. */
+.button:disabled {
+  background: var(--c-surface);
+  border-color: var(--c-stepper-border-disabled);
+  color: var(--c-stepper-fg-disabled);
+}
+
+.value {
+  font-weight: 500;
+  color: var(--c-text-strong);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+/*
+ * Product cards — 20px controls, per the design. The design's fixed 80px group
+ * width is dropped so the stepper sizes to its content, leaving the price the
+ * room it needs in the narrow 5-across card.
+ */
+.card {
+  gap: 10px;
+  justify-content: center;
+}
+
+.card .button {
+  width: 20px;
+  height: 20px;
+}
+
+.card .value {
+  min-width: 11px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/* Review-panel lines */
+.line {
+  gap: var(--s-2);
+}
+
+.line .button {
+  width: 24px;
+  height: 24px;
+}
+
+.line .value {
+  min-width: 16px;
+  font-size: 15px;
+}
