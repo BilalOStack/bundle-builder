@@ -1,0 +1,133 @@
+.step {
+  background: transparent;
+  border-radius: var(--r-panel);
+  transition: background-color var(--t-base) var(--ease);
+  /* Breathing room when an expanded step is scrolled to the top. */
+  scroll-margin-top: var(--s-4);
+}
+
+/* The expanded step sits on the pale blue field shown in the design. */
+.open {
+  background: var(--c-panel-bg);
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-eyebrow);
+  padding: 15px 15px 12px;
+  /* The design's hairline is a true half-pixel rule. */
+  border-bottom: 0.5px solid var(--c-divider);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  width: 100%;
+  padding: 20px 15px;
+  text-align: left;
+}
+
+.step:not(.open) .headerRow {
+  border-bottom: 0.5px solid var(--c-divider);
+}
+
+.headerRow:hover .title {
+  color: var(--c-primary-text);
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.stepIcon {
+  color: var(--c-text);
+  flex: none;
+}
+
+.title {
+  font-size: var(--fs-step-title);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  color: var(--c-text-strong);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--c-primary-text);
+  font-size: 14px;
+  font-weight: 500;
+  flex: none;
+}
+
+.chevron {
+  color: var(--c-primary-text);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+}
+
+/* Height animation without a fixed pixel height. */
+.panelWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-base) var(--ease);
+}
+
+.open .panelWrap {
+  grid-template-rows: 1fr;
+}
+
+.panel {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.panelInner {
+  /*
+   * Named so the product grid can query the builder's width for its column
+   * count, while each card queries its own cell for its layout.
+   */
+  container: builder / inline-size;
+  padding: 0 15px 20px;
+}
+
+.nextRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+@media (max-width: 640px) {
+  .eyebrow {
+    padding: var(--s-3) var(--s-4) var(--s-2);
+  }
+
+  .headerRow {
+    padding: var(--s-4);
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .state {
+    font-size: 15px;
+  }
+
+  .panelInner {
+    padding: 0 var(--s-4) var(--s-5);
+  }
+}

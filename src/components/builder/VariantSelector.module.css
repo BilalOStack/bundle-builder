@@ -1,0 +1,54 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+/* 65 × 26 chips with a hairline border, per the design. */
+.chip {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  /*
+   * The design specifies 65px-wide chips with a 22px thumb. Plus Jakarta Sans
+   * renders the 10px labels wider than the original Gilroy, so the chip is
+   * trimmed slightly to keep three of them on one row as the design shows.
+   */
+  padding: 1px 3px;
+  height: 26px;
+  background: var(--c-surface);
+  border: 0.5px solid var(--c-chip-border);
+  border-radius: var(--r-chip);
+  font-size: var(--fs-chip);
+  font-weight: 500;
+  letter-spacing: var(--ls-tight);
+  color: var(--c-text);
+  line-height: 1;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--c-text-subtle);
+}
+
+/* Active chip: teal hairline over a barely-there mint wash. */
+.active {
+  background: var(--c-chip-bg-active);
+  border-color: var(--c-chip-border-active);
+}
+
+.active:hover {
+  border-color: var(--c-chip-border-active);
+}
+
+.swatch {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: none;
+}
