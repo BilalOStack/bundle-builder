@@ -1,0 +1,80 @@
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--s-10) var(--s-6) var(--s-12);
+}
+
+.pageTitle {
+  font-size: var(--fs-page-title);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: var(--s-8);
+  letter-spacing: -0.01em;
+}
+
+/* Two columns on desktop: builder left, review panel right and sticky. */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--panel-w);
+  gap: var(--s-8);
+  align-items: start;
+}
+
+.panelColumn {
+  position: sticky;
+  top: var(--sticky-top);
+  min-width: 0;
+}
+
+/*
+ * Below this the builder takes the full width, which is what flips the product
+ * grid to five across and the review panel to its two-column treatment.
+ */
+@media (max-width: 1199px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-8);
+  }
+
+  .panelColumn {
+    position: static;
+  }
+
+  /* Matches the design's 15px frame padding once the builder spans the page. */
+  .page {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .page {
+    /* Clears the fixed summary bar. */
+    padding-bottom: 120px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--s-6) var(--s-3) 120px;
+  }
+
+  .pageTitle {
+    font-size: 30px;
+    margin-bottom: var(--s-5);
+  }
+
+  .layout {
+    gap: var(--s-6);
+  }
+}
+
+.status {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  color: var(--c-text-muted);
+  font-size: var(--fs-body);
+  text-align: center;
+  padding: var(--s-6);
+}
