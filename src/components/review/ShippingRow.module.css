@@ -1,0 +1,25 @@
+.row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  border-top: 1px solid var(--c-divider);
+  margin-top: var(--s-4);
+  padding-top: var(--s-4);
+}
+
+.iconBox {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-thumb);
+  color: var(--c-success);
+}
+
+.label {
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
