@@ -1,0 +1,52 @@
+/*
+ * Not in the design, but on a phone the review panel sits below four collapsed
+ * accordion rows, which would leave the running total permanently off-screen.
+ * This keeps it visible without altering the panel itself.
+ */
+.bar {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .bar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: var(--s-3) var(--s-4);
+    padding-bottom: max(var(--s-3), env(safe-area-inset-bottom));
+    background: var(--c-surface);
+    border-top: 1px solid var(--c-border);
+    box-shadow: var(--shadow-bar);
+  }
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.count {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-text-subtle);
+}
+
+.total {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--c-primary-text);
+  line-height: 1.15;
+}
+
+.action {
+  flex: none;
+  padding: 12px var(--s-5);
+  font-size: 15px;
+}
