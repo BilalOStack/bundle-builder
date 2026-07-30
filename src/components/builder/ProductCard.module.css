@@ -1,0 +1,191 @@
+.cell {
+  /*
+   * Each card gets its own container so the card can respond to its own width
+   * rather than the viewport's. This is what lets one rule produce both the
+   * wide horizontal card (2-column desktop) and the narrow vertical card
+   * (full-width builder) shown in the design.
+   */
+  container-type: inline-size;
+  display: flex;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 100%;
+  padding: 11px;
+  background: var(--c-surface);
+  border: 2px solid transparent;
+  border-radius: var(--r-card);
+  transition: border-color var(--t-base) var(--ease);
+}
+
+/* The highlighted border from the design. */
+.selected {
+  border-color: var(--c-border-selected);
+}
+
+/* Sits at the top-left corner of the image area, inset by the card padding. */
+.badge {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  z-index: 1;
+}
+
+/* Imageless cards (plans) have no media column for the badge to sit over. */
+.inlineBadge {
+  align-self: flex-start;
+  margin-bottom: var(--s-1);
+}
+
+.media {
+  display: grid;
+  place-items: center;
+  flex: none;
+  align-self: center;
+  width: 100%;
+  height: 140px;
+  /*
+   * Without this the flex item's automatic minimum size is derived from the
+   * 900px source image and the picture bursts out of the card.
+   */
+  min-height: 0;
+  min-width: 0;
+}
+
+.media img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  /*
+   * As a grid item the image's automatic minimum size is its intrinsic 264px,
+   * which silently beats max-height and pushes the picture over the title.
+   */
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--fs-card-title);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--c-text);
+}
+
+/* Plan cards lead with the product lockup instead of a plain title. */
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-card-title);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+}
+
+.lockupMark {
+  color: var(--c-primary-text);
+  flex: none;
+}
+
+.lockupAccent {
+  color: var(--c-primary-text);
+}
+
+.select {
+  padding: 8px 18px;
+  font-size: 14px;
+}
+
+.description {
+  font-size: var(--fs-body-sm);
+  color: var(--c-text-muted);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  font-weight: 500;
+}
+
+.learnMore {
+  color: var(--c-primary-text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.learnMore:hover {
+  text-decoration-thickness: 2px;
+}
+
+/*
+ * Stepper left, price right, always on one row — the design keeps them
+ * together even in the narrow 5-across card. Deliberately does not wrap:
+ * the stepper is fixed width and the price takes the remaining space.
+ */
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-top: auto;
+  padding-top: var(--s-1);
+  flex-wrap: nowrap;
+}
+
+.footer > :last-child {
+  flex: 1;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+/*
+ * Wide enough to sit the image beside the copy — the design's two-column
+ * desktop card is ~377px. Below this the card stacks, which is what the
+ * design's narrow 5-across row does.
+ */
+@container (min-width: 340px) {
+  .card {
+    flex-direction: row;
+    gap: var(--s-4);
+    padding-top: var(--s-5);
+  }
+
+  /*
+   * `height: auto` with a min-height rather than a fixed height: the media
+   * column has to contribute its height to the row, otherwise a card whose
+   * copy is shorter than the image lets the image spill past the card edge.
+   */
+  .card {
+    gap: var(--s-3);
+  }
+
+  .media {
+    width: 108px;
+    height: auto;
+    min-height: 124px;
+    align-self: stretch;
+  }
+
+  .media img {
+    max-height: 124px;
+  }
+
+  .badge {
+    top: 12px;
+    left: 12px;
+  }
+}
