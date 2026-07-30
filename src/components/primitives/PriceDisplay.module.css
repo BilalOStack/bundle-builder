@@ -1,0 +1,69 @@
+.price {
+  display: flex;
+  align-items: center;
+  /* The design sets 3px between the struck price and the live one. */
+  gap: 3px;
+  /*
+   * No letter-spacing on figures: the design's 0.6px is tuned for Gilroy, and
+   * on the wider substitute face it pushes the price into the stepper.
+   */
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.compare {
+  text-decoration: line-through;
+}
+
+.current {
+  font-weight: 500;
+}
+
+/*
+ * The strikethrough colour differs by context in the design: red on product
+ * cards, grey in the review panel. Same component, different tone.
+ */
+.card .compare {
+  color: var(--c-strike-card);
+}
+
+.card .current {
+  color: var(--c-price);
+}
+
+.review .compare {
+  color: var(--c-text-subtle);
+}
+
+.review .current {
+  color: var(--c-primary-text);
+}
+
+/* Review lines stack the two prices; cards sit them side by side. */
+.stacked {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  line-height: 1.25;
+}
+
+.sm {
+  font-size: var(--fs-caption);
+}
+
+.md {
+  font-size: var(--fs-price);
+}
+
+.lg {
+  font-size: 22px;
+}
+
+.stacked .compare {
+  font-size: var(--fs-caption);
+}
+
+.free {
+  color: var(--c-primary-text);
+  font-weight: 700;
+}

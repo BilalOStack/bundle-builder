@@ -1,0 +1,43 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s-6);
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: var(--c-text);
+  color: #fff;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  padding: 12px var(--s-5);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-raised);
+  animation: rise var(--t-base) var(--ease);
+  max-width: calc(100vw - var(--s-8));
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}
+
+/* Clears the mobile summary bar. */
+@media (max-width: 1023px) {
+  .toast {
+    bottom: 92px;
+  }
+}

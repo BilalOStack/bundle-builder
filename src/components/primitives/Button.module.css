@@ -1,0 +1,69 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  font-family: inherit;
+  font-weight: 700;
+  border-radius: var(--r-btn);
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+}
+
+/* Filled — the Checkout CTA. */
+.primary {
+  background: var(--c-primary);
+  color: #fff;
+  padding: 16px var(--s-6);
+  font-size: 17px;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--c-primary-hover);
+}
+
+/* Outlined — the "Next: …" step advance. */
+.outline {
+  background: transparent;
+  color: var(--c-primary-text);
+  border: 1px solid var(--c-primary-text);
+  padding: 5px 24px;
+  min-height: 39px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.outline:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--c-primary-text) 8%, transparent);
+}
+
+/* Text — "Save my system for later". */
+.link {
+  background: none;
+  color: var(--c-text);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  font-style: italic;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: var(--s-2);
+}
+
+.link:hover:not(:disabled) {
+  color: var(--c-primary-text);
+}
+
+.fullWidth {
+  width: 100%;
+}
