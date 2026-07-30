@@ -1,0 +1,204 @@
+/*
+ * The container lives on the panel and the grid on a child: an element cannot
+ * query its own container, so the two-column split has to sit one level in.
+ */
+.panel {
+  container: review / inline-size;
+  background: var(--c-panel-bg);
+  border-radius: var(--r-panel);
+  padding: var(--s-6);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin-bottom: var(--s-5);
+}
+
+.title {
+  font-size: var(--fs-panel-title);
+  font-weight: 700;
+  margin-bottom: var(--s-2);
+}
+
+.subtitle {
+  font-size: var(--fs-body);
+  color: var(--c-text-muted);
+  line-height: var(--lh-snug);
+}
+
+.group {
+  border-top: 1px solid var(--c-divider);
+  padding-top: var(--s-4);
+  margin-top: var(--s-4);
+}
+
+.groupLabel {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-text-subtle);
+  margin-bottom: var(--s-2);
+}
+
+.empty {
+  border-top: 1px solid var(--c-divider);
+  margin-top: var(--s-4);
+  padding: var(--s-6) 0;
+  color: var(--c-text-muted);
+  font-size: var(--fs-body);
+  text-align: center;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.guaranteeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+}
+
+/* The returns copy only appears when the panel is wide enough for it. */
+.guaranteeText {
+  display: none;
+  flex: 1;
+  min-width: 220px;
+}
+
+.guaranteeHeadline {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--s-2);
+}
+
+.guaranteeBody {
+  font-size: var(--fs-body);
+  color: var(--c-text-muted);
+  line-height: var(--lh-snug);
+}
+
+.moneyBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s-2);
+  margin-left: auto;
+}
+
+.financePill {
+  background: var(--c-primary);
+  color: #fff;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.totals {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.totalCompare {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--c-text-subtle);
+  text-decoration: line-through;
+}
+
+.totalNow {
+  font-size: var(--fs-total);
+  font-weight: 800;
+  color: var(--c-primary-text);
+  letter-spacing: -0.01em;
+}
+
+.savings {
+  color: var(--c-success);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  text-align: center;
+}
+
+.saveRow {
+  display: flex;
+  justify-content: center;
+}
+
+/*
+ * Wide panel (the full-width treatment in the design): line items on the left,
+ * guarantee and totals on the right.
+ */
+@container review (min-width: 720px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--s-10);
+  }
+
+  .guaranteeText {
+    display: block;
+  }
+
+  .moneyBlock {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 0;
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .savings {
+    text-align: left;
+  }
+}
+
+/* The panel runs full width once the layout stacks, so it earns more padding. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .panel {
+    padding: var(--s-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: var(--s-5) var(--s-4);
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .totalNow {
+    font-size: 30px;
+  }
+
+  .totalCompare {
+    font-size: 18px;
+  }
+}
