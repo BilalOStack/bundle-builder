@@ -59,17 +59,38 @@
   line-height: 20px;
 }
 
-/* Review-panel lines */
+/*
+ * Review-panel lines are a different control from the card's: white chips on
+ * the blue field, a darker glyph, and a bordered grey disabled state used by
+ * the locked Sense Hub.
+ */
 .line {
-  gap: var(--s-2);
+  gap: 10px;
 }
 
 .line .button {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  background: var(--c-linestep-bg);
+  border-color: var(--c-linestep-bg);
+  color: var(--c-linestep-fg);
+}
+
+.line .button:hover:not(:disabled) {
+  background: var(--c-linestep-bg-hover);
+  border-color: var(--c-linestep-bg-hover);
+}
+
+.line .button:disabled {
+  background: var(--c-linestep-bg-disabled);
+  border-color: var(--c-linestep-border-disabled);
+  border-width: 1px;
+  color: var(--c-linestep-fg);
 }
 
 .line .value {
-  min-width: 16px;
-  font-size: 15px;
+  min-width: 8px;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 16px;
 }

@@ -31,7 +31,7 @@
 @container builder (min-width: 480px) and (max-width: 1039px) {
   .grid > :last-child:nth-child(odd) {
     grid-column: 1 / -1;
-    width: calc(50% - (var(--s-4) / 2));
+    width: calc(50% - 7.5px);
     justify-self: center;
   }
 }

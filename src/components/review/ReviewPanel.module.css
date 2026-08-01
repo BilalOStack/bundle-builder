@@ -2,17 +2,23 @@
  * The container lives on the panel and the grid on a child: an element cannot
  * query its own container, so the two-column split has to sit one level in.
  */
+/*
+ * The eyebrow sits in the panel's 15px gutter while the body is inset 20px,
+ * so the padding is split between the panel and .main rather than sitting on
+ * one element (Frame 1736 in the design file).
+ */
 .panel {
   container: review / inline-size;
   background: var(--c-panel-bg);
   border-radius: var(--r-panel);
-  padding: var(--s-6);
+  padding: 15px 0 31px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s-6);
+  padding: 0 var(--s-5);
 }
 
 .main {
@@ -23,35 +29,42 @@
 
 .eyebrow {
   font-size: var(--fs-eyebrow);
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--c-text-muted);
+  color: var(--c-eyebrow);
+  padding: 0 15px;
   margin-bottom: var(--s-5);
 }
 
 .title {
   font-size: var(--fs-panel-title);
-  font-weight: 700;
-  margin-bottom: var(--s-2);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--ls-tight);
+  color: var(--c-text);
+  margin-bottom: 5px;
 }
 
 .subtitle {
   font-size: var(--fs-body);
   color: var(--c-text-muted);
   line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
 }
 
 .group {
   border-top: 1px solid var(--c-divider);
-  padding-top: var(--s-4);
-  margin-top: var(--s-4);
+  padding-top: 15px;
+  margin-top: var(--s-3);
 }
 
 .groupLabel {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--ls-eyebrow);
+  font-size: var(--fs-group);
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: var(--ls-group);
   text-transform: uppercase;
   color: var(--c-text-subtle);
   margin-bottom: var(--s-2);
@@ -111,36 +124,43 @@
   background: var(--c-primary);
   color: #fff;
   font-size: var(--fs-caption);
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 6px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.05em;
+  padding: 5px 8px;
+  border-radius: var(--r-pill-sm);
   white-space: nowrap;
 }
 
 .totals {
   display: flex;
   align-items: baseline;
-  gap: var(--s-3);
+  gap: var(--s-2);
 }
 
 .totalCompare {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--c-text-subtle);
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.0025em;
+  color: var(--c-text-meta);
   text-decoration: line-through;
 }
 
 .totalNow {
   font-size: var(--fs-total);
-  font-weight: 800;
+  font-weight: 700;
+  line-height: 32px;
   color: var(--c-primary-text);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.00125em;
 }
 
 .savings {
   color: var(--c-success);
   font-size: var(--fs-caption);
   font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.056px;
   text-align: center;
 }
 
@@ -156,7 +176,7 @@
 @container review (min-width: 720px) {
   .grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--s-10);
+    gap: 52px;
   }
 
   .guaranteeText {
@@ -178,27 +198,17 @@
   }
 }
 
-/* The panel runs full width once the layout stacks, so it earns more padding. */
-@media (min-width: 900px) and (max-width: 1199px) {
-  .panel {
-    padding: var(--s-8);
-  }
-}
-
+/* The phone frame drops the panel copy a step and loses the side gutter. */
 @media (max-width: 640px) {
-  .panel {
-    padding: var(--s-5) var(--s-4);
+  .grid {
+    padding: 0 var(--s-4);
   }
 
-  .title {
-    font-size: 24px;
+  .eyebrow {
+    padding: 0 var(--s-4);
   }
 
-  .totalNow {
-    font-size: 30px;
-  }
-
-  .totalCompare {
-    font-size: 18px;
+  .subtitle {
+    font-size: var(--fs-caption);
   }
 }

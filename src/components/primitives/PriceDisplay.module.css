@@ -15,40 +15,45 @@
   text-decoration: line-through;
 }
 
-.current {
-  font-weight: 500;
-}
-
 /*
- * The strikethrough colour differs by context in the design: red on product
- * cards, grey in the review panel. Same component, different tone.
+ * The two contexts are styled differently in the design: a card sets both
+ * figures in Regular — red struck, grey live — while a review line sets the
+ * struck price in Medium grey and the live one in SemiBold purple.
  */
 .card .compare {
   color: var(--c-strike-card);
+  font-weight: 400;
 }
 
 .card .current {
   color: var(--c-price);
+  font-weight: 400;
+}
+
+.review {
+  letter-spacing: var(--ls-line);
 }
 
 .review .compare {
-  color: var(--c-text-subtle);
+  color: var(--c-text-meta);
+  font-weight: 500;
 }
 
 .review .current {
   color: var(--c-primary-text);
+  font-weight: 600;
 }
 
 /* Review lines stack the two prices; cards sit them side by side. */
 .stacked {
   flex-direction: column;
   align-items: flex-end;
-  gap: 2px;
-  line-height: 1.25;
+  gap: 0;
+  line-height: 16px;
 }
 
 .sm {
-  font-size: var(--fs-caption);
+  font-size: var(--fs-body);
 }
 
 .md {
@@ -59,11 +64,12 @@
   font-size: 22px;
 }
 
-.stacked .compare {
-  font-size: var(--fs-caption);
-}
-
 .free {
   color: var(--c-primary-text);
-  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .sm {
+    font-size: var(--fs-caption);
+  }
 }

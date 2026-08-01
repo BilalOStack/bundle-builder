@@ -1,9 +1,14 @@
+/* 41px thumb, 12px to the name, 16px out to the price — per the design. */
 .line {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  grid-template-columns: 41px minmax(0, 1fr) auto auto;
   align-items: center;
   gap: var(--s-3);
-  padding: var(--s-2) 0;
+  padding: 6px 0;
+}
+
+.line > .price {
+  margin-left: var(--s-1);
 }
 
 /* The plan renders as a logo lockup with no thumbnail and no stepper. */
@@ -12,12 +17,11 @@
 }
 
 .thumb {
-  width: 48px;
-  height: 48px;
+  width: 41px;
+  height: 41px;
   display: grid;
   place-items: center;
   background: var(--c-surface);
-  border: 1px solid var(--c-border);
   border-radius: var(--r-thumb);
   overflow: hidden;
   flex: none;
@@ -34,7 +38,9 @@
 .name {
   font-size: var(--fs-body);
   font-weight: 500;
-  line-height: var(--lh-snug);
+  line-height: 16px;
+  letter-spacing: var(--ls-line);
+  color: var(--c-text-strong);
   min-width: 0;
 }
 
@@ -53,10 +59,12 @@
 .lockup {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 20px;
+  gap: 3px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--c-text);
+  line-height: 1;
+  letter-spacing: -0.002em;
+  color: #000;
   min-width: 0;
 }
 
@@ -67,6 +75,16 @@
 
 .lockupAccent {
   color: var(--c-primary-text);
+}
+
+@media (max-width: 640px) {
+  .name {
+    font-size: var(--fs-caption);
+  }
+
+  .lockup {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 420px) {

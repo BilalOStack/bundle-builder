@@ -156,12 +156,24 @@ The two design frames disagree — the desktop frame shows a bare chevron on col
 
 ### Assets
 
-The Figma file was **view-only** for my account and Figma's MCP requires edit access, so I couldn't export tokens or assets from it. Instead:
+The Figma file was **view-only** for my account and Figma's MCP requires edit access, so I couldn't pull assets through the API. The layer CSS was exported by hand instead, frame by frame.
 
 - **Product photography** — the Wyze storefront is Shopify-backed, so the real product images (including per-variant White/Grey/Black shots) came from its public products JSON. These are the same images the design uses.
 - **Icons and the guarantee seal** are hand-authored SVG, redrawn from the screenshots. The seal's scalloped outline is generated from a polar equation and its ring of copy rides a circular `<textPath>`.
-- **Colours, spacing and type** come from the Figma layer CSS for the builder frame — purple `#4E2FD2`, panel `#EDF4FF`, card strikethrough `#D8392B`, 10px card radius, 0.5px hairlines, and so on. Anything that export didn't cover (mainly the review panel) is still sampled from the screenshots and marked as such in `src/styles/tokens.css`.
-- **Typeface** — the design uses **Gilroy**, which is commercially licensed. I shipped **Plus Jakarta Sans** as the closest free match; it's a one-token swap. It does render wider than Gilroy at small sizes, which forced two small compensations, both noted in the CSS: the variant chips are trimmed a few pixels so three still fit one row, and figures drop the design's 0.6px letter-spacing so the price can't collide with the stepper in the narrow 5-across card.
+- **Colours, spacing and type** are taken from the Figma layer CSS of all three frames — nothing is sampled by eye. Every value lives in `src/styles/tokens.css` and keeps Figma's own swatch name in a comment (`Gray-C/600`, `core/wyze purple`, …) so it can be traced back. A few worth calling out, because they're easy to get wrong from a screenshot: the step rules are `0.5px #1F1F1F` while the review-panel rules are `1px #CED6DE`; the card and review steppers are *different controls* (grey `#F0F4F7` chip with a `#525963` glyph vs. a white chip with `#575757`); and a card's live price is grey `#575757`, not the purple the review lines use.
+- **Typeface** — the design is set in **Gilroy** (and the Checkout label alone in **TT Norms Pro**), both commercially licensed, so neither is committed here. `--font-sans` lists Gilroy first and falls back to **Plus Jakarta Sans**, so the app picks Gilroy up automatically if it's installed locally. To ship it properly, drop the woff2 files into `public/fonts/` and add:
+
+  ```css
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+  }
+  /* …and the same for 400 / 600 / 700 plus the 400 italic used by the save link. */
+  ```
+
+  Plus Jakarta Sans renders wider than Gilroy at small sizes, which forced two compensations, both noted in the CSS: the variant chips are trimmed a few pixels so three still fit one row, and figures drop the design's 0.6px letter-spacing so the price can't collide with the stepper in the narrow 5-across card. Both can be reverted once the real face is in.
 
 ---
 
@@ -201,7 +213,7 @@ One thing worth flagging: `discountPercent` **floors** rather than rounds. Pan v
 
 ## What I'd do next
 
-- Re-derive tokens and export assets from the Figma file directly, once access allows — the colours here are eyeballed.
+- Licence Gilroy and TT Norms Pro and self-host them, then drop the two substitute-face compensations noted under Assets.
 - Resolve the Pan v3 pricing question with whoever owns the design.
 - Variant-level stock and availability states.
 - Persist to a backend rather than localStorage so a system follows the shopper across devices.

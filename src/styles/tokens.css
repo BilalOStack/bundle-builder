@@ -1,10 +1,10 @@
 /*
  * Design tokens.
  *
- * Values come from the Figma layer CSS for the builder frame. The Figma file
- * itself was View-only for the connected account, so anything the exported CSS
- * didn't cover (mainly the review panel) is still sampled from the design
- * screenshots and marked below.
+ * Every value below comes from the Figma layer CSS for the three frames
+ * (iPhone 13 & 14 - 35, Frame 1735, Frame 1736) — nothing here is sampled by
+ * eye. Figma's own swatch names are kept in the comments (Gray-C/600,
+ * core/wyze purple, …) so a value can be traced back to its source.
  */
 
 :root {
@@ -22,34 +22,47 @@
   --c-chip-border: #cccccc;
   --c-chip-border-active: #0aa288; /* teal ring on the active variant chip */
   --c-chip-bg-active: rgba(29, 240, 187, 0.04);
-  --c-divider: #1f1f1f; /* hairline, drawn at 0.5px */
+  --c-rule: #1f1f1f; /* step hairline, drawn at 0.5px */
+  --c-divider: #ced6de; /* review group rules, 1px — Gray-C/400 */
 
   /* ---- text -------------------------------------------------------- */
   --c-text: #1f1f1f;
-  --c-text-strong: #0b0d10; /* step titles, stepper value */
+  --c-text-strong: #0b0d10; /* Gray-C/Obsidian — step titles, review names */
   --c-text-muted: rgba(31, 31, 31, 0.75);
-  --c-text-subtle: #98a2b3; /* review group headings (sampled) */
-  --c-eyebrow: #484848;
+  --c-text-meta: #6f7882; /* Gray-C/600 — review strikethrough, step icons */
+  --c-text-subtle: #a8b2bd; /* Gray-C/500 — CAMERAS / SENSORS labels */
+  --c-eyebrow: #484848; /* STEP 1 OF 4, REVIEW, the save link */
   --c-price: #575757; /* active price on a product card */
   --c-strike-card: #d8392b; /* red strikethrough — PRODUCT CARDS ONLY */
-  --c-success: #00b87c; /* savings callout (sampled) */
+  --c-success: #0aa288; /* savings callout + shipping icon */
 
   /* ---- controls ---------------------------------------------------- */
-  --c-stepper-bg: #f0f4f7;
+  /* Product cards: a filled grey chip, outlined when inert. */
+  --c-stepper-bg: #f0f4f7; /* Gray-C/200 */
   --c-stepper-bg-hover: #e6ebf0;
-  --c-stepper-fg: #525963;
-  --c-stepper-fg-disabled: #ced6de;
-  --c-stepper-border-disabled: #e6ebf0;
+  --c-stepper-fg: #525963; /* Gray-C/700 */
+  --c-stepper-fg-disabled: #ced6de; /* Gray-C/400 */
+  --c-stepper-border-disabled: #e6ebf0; /* Gray-C/300 */
+
+  /* Review lines: white chips on the blue panel, greyed when locked. */
+  --c-linestep-bg: #ffffff;
+  --c-linestep-bg-hover: #e8eef5;
+  --c-linestep-fg: #575757; /* utility/gray-70 */
+  --c-linestep-bg-disabled: #f1f1f2;
+  --c-linestep-border-disabled: #ced6de;
+
   --c-focus-ring: #4e2fd2;
 
   /* ---- radii ------------------------------------------------------- */
   --r-card: 10px;
   --r-chip: 2px;
-  --r-btn: 7px;
+  --r-btn: 4px; /* Checkout */
+  --r-btn-outline: 7px; /* Next: … */
   --r-stepper: 4px;
   --r-panel: 10px;
   --r-thumb: 5px;
-  --r-pill: 10px;
+  --r-pill: 10px; /* Save 22% badge */
+  --r-pill-sm: 3px; /* financing pill */
 
   /* ---- spacing (4px base) ------------------------------------------ */
   --s-1: 4px;
@@ -64,20 +77,28 @@
   --s-12: 48px;
 
   /* ---- typography -------------------------------------------------- */
+  /*
+   * The design is set in Gilroy, a licensed face. Drop the webfont files into
+   * public/fonts/ and add the @font-face block (see the README) and the whole
+   * app picks it up; Plus Jakarta Sans is the free stand-in until then.
+   */
   --font-sans:
-    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif;
+    'Gilroy', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  /* The Checkout label alone is set in TT Norms Pro. */
+  --font-button: 'TT Norms Pro', var(--font-sans);
 
-  --fs-eyebrow: 12px; /* "STEP 1 OF 4", "REVIEW", "CAMERAS" */
+  --fs-eyebrow: 12px; /* "STEP 1 OF 4", "REVIEW" */
+  --fs-group: 12px; /* "CAMERAS", "SENSORS" */
   --fs-chip: 10px;
-  --fs-caption: 13px;
+  --fs-caption: 12px; /* financing pill, savings callout */
   --fs-body-sm: 14px; /* card description */
-  --fs-body: 15px; /* review line name */
-  --fs-price: 16px;
+  --fs-body: 14px; /* review line name + prices */
+  --fs-price: 16px; /* card price */
   --fs-card-title: 18px;
   --fs-step-title: 28px;
-  --fs-panel-title: 28px;
-  --fs-total: 31px;
+  --fs-panel-title: 22px;
+  --fs-total: 24px;
   --fs-page-title: 40px;
 
   --lh-tight: 1.2;
@@ -86,6 +107,8 @@
 
   --ls-eyebrow: 1.6px;
   --ls-tight: 0.6px; /* titles, descriptions, chips, prices */
+  --ls-group: 0.03em; /* review group headings */
+  --ls-line: 0.005em; /* review line names and prices */
 
   /* ---- elevation --------------------------------------------------- */
   --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
@@ -98,8 +121,10 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ---- layout ------------------------------------------------------ */
-  --page-max: 1280px;
-  --panel-w: 400px;
+  /* Frame 1735: builder 768 + 29 gutter + panel 399 = 1196px of content. */
+  --page-max: 1244px;
+  --panel-w: 399px;
+  --col-gap: 29px;
   --sticky-top: 24px;
 }
 

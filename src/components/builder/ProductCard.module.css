@@ -188,4 +188,24 @@
     top: 12px;
     left: 12px;
   }
+
+  /*
+   * The wide card sets its copy a step smaller than the narrow one — 16/12
+   * against 18/14 — which is what the two desktop frames specify.
+   */
+  .title {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: var(--fs-caption);
+  }
+
+  /* …and stacks the struck price above the live one instead of inlining it. */
+  .footer > :last-child {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    line-height: 1;
+  }
 }
