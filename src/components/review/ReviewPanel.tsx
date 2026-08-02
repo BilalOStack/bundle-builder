@@ -55,7 +55,11 @@ export function ReviewPanel() {
 
         <div className={styles.summary}>
           <div className={styles.guaranteeRow}>
-            <GuaranteeSeal ringText={catalog.guarantee.sealLines[0]} size={104} />
+            <GuaranteeSeal
+              ringText={catalog.guarantee.sealLines[0]}
+              imageSrc={catalog.guarantee.sealImage}
+              size={78}
+            />
 
             <div className={styles.guaranteeText}>
               <h3 className={styles.guaranteeHeadline}>{catalog.guarantee.headline}</h3>

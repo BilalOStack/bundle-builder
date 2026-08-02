@@ -106,7 +106,7 @@ export interface Catalog {
     price: Cents;
     freeLabel: string;
   };
-  guarantee: { headline: string; body: string; sealLines: string[] };
+  guarantee: { headline: string; body: string; sealLines: string[]; sealImage?: string };
   financing: { months: number; apr: number; prefix: string };
   savingsTemplate: string;
   seed: SeedEntry[];

@@ -27,7 +27,7 @@ export function ReviewLine({ item }: { item: LineItem }) {
 
       {lockup ? (
         <p className={styles.lockup}>
-          <Icon name={lockup.mark} size={22} className={styles.lockupMark} />
+          <Icon name={lockup.mark} size={23.7} className={styles.lockupMark} />
           <span>
             {lockup.lead} <span className={styles.lockupAccent}>{lockup.accent}</span>
           </span>

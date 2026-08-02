@@ -1,9 +1,14 @@
 import styles from './GuaranteeSeal.module.css';
 
 /**
- * The scalloped satisfaction seal. Drawn rather than exported as an asset:
- * the lobed outline is generated from a polar equation, and the ring of copy
- * rides a circular <textPath>.
+ * The satisfaction seal.
+ *
+ * The design's own asset is a raster image rather than vector artwork, so this
+ * renders it directly when the catalog supplies `sealImage`. Without one it
+ * falls back to drawing the seal: the lobed outline comes from a polar
+ * equation and the ring of copy rides a circular <textPath>. The drawn version
+ * is what the app used before the asset existed, and it keeps the component
+ * working if the image is ever missing.
  */
 
 const LOBES = 16;
@@ -27,13 +32,33 @@ const SEAL_PATH = scallopedPath();
 /** Counter-clockwise so the ring of text reads the right way up. */
 const TEXT_ARC = 'M 50 12 A 38 38 0 1 1 49.9 12';
 
+const LABEL = '100% Wyze satisfaction guarantee';
+
 interface GuaranteeSealProps {
   ringText: string;
+  /** Path to the design's seal artwork. Falls back to the drawn seal. */
+  imageSrc?: string;
   size?: number;
   className?: string;
 }
 
-export function GuaranteeSeal({ ringText, size = 112, className }: GuaranteeSealProps) {
+export function GuaranteeSeal({ ringText, imageSrc, size = 78, className }: GuaranteeSealProps) {
+  const classes = [styles.seal, className].filter(Boolean).join(' ');
+
+  if (imageSrc) {
+    return (
+      <img
+        src={imageSrc}
+        width={size}
+        height={size}
+        className={classes}
+        alt={`${LABEL}. ${ringText}.`}
+        loading="lazy"
+        decoding="async"
+      />
+    );
+  }
+
   const ring = `${ringText}   ·   `.repeat(3);
 
   return (
@@ -41,9 +66,9 @@ export function GuaranteeSeal({ ringText, size = 112, className }: GuaranteeSeal
       viewBox="0 0 100 100"
       width={size}
       height={size}
-      className={[styles.seal, className].filter(Boolean).join(' ')}
+      className={classes}
       role="img"
-      aria-label="100% Wyze satisfaction guarantee"
+      aria-label={LABEL}
     >
       <path d={SEAL_PATH} className={styles.body} />
 

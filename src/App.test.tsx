@@ -28,7 +28,8 @@ describe('initial render', () => {
       .getAllByRole('heading', { level: 3 })
       .map((node) => node.textContent);
 
-    expect(headings).toEqual(['Cameras', 'Sensors', 'Accessories', 'Plan']);
+    // Rendered uppercase by CSS, so textContent is the catalog's raw label.
+    expect(headings).toEqual(['Cameras', 'Sensors', 'Accessories', 'Home monitoring plan']);
     expect(reviewLine('Wyze Cam v4')).not.toBeNull();
     expect(reviewLine('Wyze Sense Hub')).not.toBeNull();
     expect(reviewLine('Cam Unlimited')).not.toBeNull();
