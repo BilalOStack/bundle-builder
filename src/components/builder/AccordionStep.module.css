@@ -19,7 +19,7 @@
   color: var(--c-eyebrow);
   padding: 15px 15px 12px;
   /* The design's hairline is a true half-pixel rule. */
-  border-bottom: 0.5px solid var(--c-divider);
+  border-bottom: 0.5px solid var(--c-rule);
 }
 
 .headerRow {
@@ -33,7 +33,7 @@
 }
 
 .step:not(.open) .headerRow {
-  border-bottom: 0.5px solid var(--c-divider);
+  border-bottom: 0.5px solid var(--c-rule);
 }
 
 .headerRow:hover .title {
@@ -48,7 +48,7 @@
 }
 
 .stepIcon {
-  color: var(--c-text);
+  color: var(--c-text-meta);
   flex: none;
 }
 
@@ -113,6 +113,7 @@
 @media (max-width: 640px) {
   .eyebrow {
     padding: var(--s-3) var(--s-4) var(--s-2);
+    font-size: 10px;
   }
 
   .headerRow {
@@ -120,11 +121,11 @@
   }
 
   .title {
-    font-size: 21px;
+    font-size: 18px;
   }
 
   .state {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .panelInner {

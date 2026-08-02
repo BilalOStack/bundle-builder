@@ -1,20 +1,19 @@
 .row {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) auto;
+  grid-template-columns: 41px minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--s-3);
   border-top: 1px solid var(--c-divider);
-  margin-top: var(--s-4);
-  padding-top: var(--s-4);
+  margin-top: 10px;
+  padding-top: 15px;
 }
 
 .iconBox {
-  width: 48px;
-  height: 48px;
+  width: 41px;
+  height: 41px;
   display: grid;
   place-items: center;
   background: var(--c-surface);
-  border: 1px solid var(--c-border);
   border-radius: var(--r-thumb);
   color: var(--c-success);
 }
@@ -22,4 +21,13 @@
 .label {
   font-size: var(--fs-body);
   font-weight: 500;
+  line-height: 16px;
+  letter-spacing: var(--ls-line);
+  color: var(--c-text-strong);
+}
+
+@media (max-width: 640px) {
+  .label {
+    font-size: var(--fs-caption);
+  }
 }

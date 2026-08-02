@@ -2,17 +2,23 @@
  * The container lives on the panel and the grid on a child: an element cannot
  * query its own container, so the two-column split has to sit one level in.
  */
+/*
+ * The eyebrow sits in the panel's 15px gutter while the body is inset 20px,
+ * so the padding is split between the panel and the grid rather than living
+ * on one element.
+ */
 .panel {
   container: review / inline-size;
   background: var(--c-panel-bg);
   border-radius: var(--r-panel);
-  padding: var(--s-6);
+  padding: 15px 0 31px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s-6);
+  padding: 0 var(--s-5);
 }
 
 .main {
@@ -23,35 +29,43 @@
 
 .eyebrow {
   font-size: var(--fs-eyebrow);
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--c-text-muted);
+  color: var(--c-eyebrow);
+  padding: 0 15px;
   margin-bottom: var(--s-5);
 }
 
 .title {
   font-size: var(--fs-panel-title);
-  font-weight: 700;
-  margin-bottom: var(--s-2);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--ls-tight);
+  color: var(--c-text);
+  margin-bottom: 5px;
 }
 
 .subtitle {
   font-size: var(--fs-body);
+  font-weight: 500;
   color: var(--c-text-muted);
   line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
 }
 
 .group {
   border-top: 1px solid var(--c-divider);
-  padding-top: var(--s-4);
-  margin-top: var(--s-4);
+  padding-top: 15px;
+  margin-top: 10px;
 }
 
 .groupLabel {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--ls-eyebrow);
+  font-size: var(--fs-group);
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: var(--ls-group);
   text-transform: uppercase;
   color: var(--c-text-subtle);
   margin-bottom: var(--s-2);
@@ -66,10 +80,15 @@
   text-align: center;
 }
 
+/*
+ * Spacing is set per child rather than with a single gap: the design binds the
+ * savings callout tightly to the Checkout button (10px above it, 4px below)
+ * and leaves a wider space above the guarantee row.
+ */
 .summary {
   display: flex;
   flex-direction: column;
-  gap: var(--s-4);
+  gap: 0;
   min-width: 0;
 }
 
@@ -111,42 +130,52 @@
   background: var(--c-primary);
   color: #fff;
   font-size: var(--fs-caption);
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 6px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.05em;
+  padding: 5px 8px;
+  border-radius: var(--r-pill-sm);
   white-space: nowrap;
 }
 
 .totals {
   display: flex;
   align-items: baseline;
-  gap: var(--s-3);
+  gap: var(--s-2);
 }
 
 .totalCompare {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--c-text-subtle);
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.0025em;
+  color: var(--c-text-meta);
   text-decoration: line-through;
 }
 
 .totalNow {
   font-size: var(--fs-total);
-  font-weight: 800;
+  font-weight: 700;
+  line-height: 32px;
   color: var(--c-primary-text);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.00125em;
 }
 
 .savings {
   color: var(--c-success);
   font-size: var(--fs-caption);
   font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.056px;
   text-align: center;
+  padding-top: 10px;
+  margin-bottom: 4px;
 }
 
 .saveRow {
   display: flex;
   justify-content: center;
+  margin-top: var(--s-2);
 }
 
 /*
@@ -156,7 +185,7 @@
 @container review (min-width: 720px) {
   .grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--s-10);
+    gap: 52px;
   }
 
   .guaranteeText {
@@ -173,32 +202,48 @@
     flex-basis: 100%;
   }
 
-  .savings {
-    text-align: left;
-  }
-}
-
-/* The panel runs full width once the layout stacks, so it earns more padding. */
-@media (min-width: 900px) and (max-width: 1199px) {
-  .panel {
-    padding: var(--s-8);
-  }
-}
-
-@media (max-width: 640px) {
-  .panel {
-    padding: var(--s-5) var(--s-4);
+  /*
+   * Everything in the money block steps up with the wider column: the pill
+   * grows from 12/15 to 16/19 on even padding, and the totals from 18/24 to
+   * 22/28. Only the sizes change — colours and tracking are shared.
+   */
+  .financePill {
+    font-size: 16px;
+    line-height: 19px;
+    padding: 8px;
   }
 
-  .title {
-    font-size: 24px;
-  }
-
-  .totalNow {
-    font-size: 30px;
+  .totals {
+    justify-content: flex-end;
+    flex: 1;
   }
 
   .totalCompare {
-    font-size: 18px;
+    font-size: 22px;
+  }
+
+  .totalNow {
+    font-size: 28px;
+  }
+
+  /* The wide panel sets the callout a step up, but keeps it centred. */
+  .savings {
+    font-size: var(--fs-body);
+  }
+}
+
+/* The phone frame keeps the same panel, one step down on the copy. */
+@media (max-width: 640px) {
+  .grid {
+    padding: 0 var(--s-4);
+  }
+
+  .eyebrow {
+    padding: 0 var(--s-4);
+    font-size: 10px;
+  }
+
+  .subtitle {
+    font-size: var(--fs-caption);
   }
 }

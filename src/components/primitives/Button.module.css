@@ -21,26 +21,31 @@
   opacity: 0.5;
 }
 
-/* Filled — the Checkout CTA. */
+/* Filled — the Checkout CTA, the one place the design uses TT Norms Pro. */
 .primary {
   background: var(--c-primary);
   color: #fff;
-  padding: 16px var(--s-6);
+  padding: 13px var(--s-4);
+  min-height: 48px;
+  font-family: var(--font-button);
   font-size: 17px;
+  line-height: 22px;
 }
 
 .primary:hover:not(:disabled) {
   background: var(--c-primary-hover);
 }
 
-/* Outlined — the "Next: …" step advance. */
+/* Outlined — the "Next: …" step advance, on a wider 7px radius. */
 .outline {
   background: transparent;
   color: var(--c-primary-text);
   border: 1px solid var(--c-primary-text);
+  border-radius: var(--r-btn-outline);
   padding: 5px 24px;
   min-height: 39px;
   font-size: 18px;
+  line-height: 24px;
   font-weight: 600;
 }
 
@@ -48,16 +53,24 @@
   background: color-mix(in srgb, var(--c-primary-text) 8%, transparent);
 }
 
-/* Text — "Save my system for later". */
+/* Text — "Save my system for later", set in Gilroy Regular Italic. */
 .link {
   background: none;
-  color: var(--c-text);
-  font-weight: 500;
+  color: var(--c-eyebrow);
+  font-weight: 400;
   font-size: var(--fs-body);
+  line-height: 120%;
+  letter-spacing: -0.016px;
   font-style: italic;
   text-decoration: underline;
   text-underline-offset: 3px;
   padding: var(--s-2);
+}
+
+@media (max-width: 640px) {
+  .link {
+    font-size: var(--fs-caption);
+  }
 }
 
 .link:hover:not(:disabled) {
