@@ -10,8 +10,9 @@ import styles from './ShippingRow.module.css';
 export function ShippingRow({ shipping }: { shipping: Catalog['shipping'] }) {
   return (
     <div className={styles.row}>
+      {/* The glyph is drawn on the 41px tile, so it fills the box outright. */}
       <span className={styles.iconBox}>
-        <Icon name={shipping.icon} size={26} />
+        <Icon name={shipping.icon} size={41} />
       </span>
       <p className={styles.label}>{shipping.label}</p>
       <PriceDisplay

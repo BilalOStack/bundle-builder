@@ -55,7 +55,7 @@
     },
     {
       "id": "plan",
-      "label": "Plan",
+      "label": "Home monitoring plan",
       "order": 4
     }
   ],
@@ -339,7 +339,8 @@
   "guarantee": {
     "headline": "30-day hassle-free returns",
     "body": "If you're not totally in love with the product, we will refund you 100%.",
-    "sealLines": ["Try worry-free for 30 days"]
+    "sealLines": ["Try worry-free for 30 days"],
+    "sealImage": "/assets/satisfaction-badge.png"
   },
   "financing": {
     "months": 12,
