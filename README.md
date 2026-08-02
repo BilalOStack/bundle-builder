@@ -15,11 +15,22 @@ A multi-step security-system bundle builder with a live review panel, built as a
 
 ---
 
+## What's here
+
+- **React source** — `src/`, TypeScript throughout.
+- **The data** — `data/catalog.json`, the single source every screen renders from, plus an optional Express API in `server/` (the bonus).
+- **Run instructions** — directly below; it builds and runs from a clean clone.
+- **Decisions and tradeoffs** — [further down](#decisions-and-tradeoffs), including what doesn't match the design and why.
+
+---
+
 ## Running it
 
 Requires Node 18+ (developed on Node 24).
 
 ```bash
+git clone https://github.com/BilalOStack/bundle-builder.git
+cd bundle-builder
 npm install
 npm run dev
 ```
@@ -33,7 +44,7 @@ That's everything — the app renders from the bundled `data/catalog.json` and n
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Start the app |
-| `npm test` | Run the test suite (70 tests) |
+| `npm test` | Run the test suite (73 tests) |
 | `npm run build` | Typecheck and produce a production build |
 | `npm run preview` | Serve the production build |
 | `npm run lint` | ESLint, zero-warnings policy |
@@ -132,6 +143,8 @@ The brief says "distinct products", and the design confirms it: step 1 reads "2 
 
 Only step 1 is ever shown expanded, so the plan and extra-protection cards had to be authored: **Cam Plus** and **Cam Basic** alongside the design's Cam Unlimited, and entry/climate/leak sensors, a solar panel, lamp socket and mounting kit alongside the MicroSD card. The step 3 sensors and step 4 accessory that appear in the design's review panel are real.
 
+Because the design gives nothing to copy for those hidden steps, the invented cards — their names, descriptions and prices — were drafted with the help of AI agents. They exist so the steps aren't empty when you open them; treat them as filler rather than real catalogue data.
+
 The plan step is `selectionMode: 'single'` — picking one clears the others, since a monthly plan isn't a quantity. Those cards render a Select/Selected control instead of a stepper, and lead with the product lockup rather than a photo (a subscription has no product shot).
 
 ### Opening a step scrolls to it
@@ -159,7 +172,8 @@ Because it's now visible text it forms part of the header button's accessible na
 ### Assets
 
 - **Product photography** — the Wyze storefront is Shopify-backed, so the real product images (including per-variant White/Grey/Black shots) came from its public products JSON. These are the same images the design uses.
-- **Icons and the guarantee seal** are hand-authored SVG, redrawn from the screenshots. The seal's scalloped outline is generated from a polar equation and its ring of copy rides a circular `<textPath>`.
+- **Marks** — the home-monitoring shield, the delivery truck and the guarantee seal come from the design's own artwork: the first two as SVG paths, the seal as a PNG, since it's a raster image in the file. Each was wrong in a way that wasn't visible at the size it renders when I'd drawn it by hand — the shield carries its own blue (`#0046C7`) rather than the wyze purple around it, and the truck has two speed lines, not three.
+- **The four step icons** are still hand-authored SVG, redrawn from the screenshots, as is the fallback seal used when the catalog supplies no image — its scalloped outline is generated from a polar equation and its ring of copy rides a circular `<textPath>`.
 - **Colours, spacing and type** come from the Figma layer CSS of all three frames — nothing is sampled by eye. Every value lives in `src/styles/tokens.css` and keeps Figma's own swatch name in a comment (`Gray-C/600`, `core/wyze purple`, …) so it can be traced back. Three that are easy to get wrong from a screenshot: the step rules are `0.5px #1F1F1F` while the review-panel rules are `1px #CED6DE`; the card and review steppers are *different controls* (a grey `#F0F4F7` chip with a `#525963` glyph vs. a white chip with `#575757`, and two different disabled treatments); and a card's live price is grey `#575757`, not the purple the review lines use.
 - **Typeface** — the design is set in **Gilroy**, with the Checkout label alone in **TT Norms Pro**. Both are commercially licensed, so neither is committed here. `--font-sans` lists Gilroy first and falls back to **Plus Jakarta Sans**, so the app picks Gilroy up automatically if it's installed locally. To ship it properly, drop the woff2 files into `public/fonts/` and add:
 
@@ -193,7 +207,7 @@ Not in the brief, but it's the difference between matching a mock and shipping U
 
 ## Testing
 
-70 tests, `npm test`.
+73 tests, `npm test`.
 
 **Unit** (`src/store`, `src/lib`) — the reducer and selectors, including variant isolation, zero-clamping, locked products, single-select, and the derived figures asserted against the design's own numbers: savings of `$50.92`, step counts of 2/1/2/1, badges of 22/12/22.
 
