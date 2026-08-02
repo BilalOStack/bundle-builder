@@ -97,8 +97,8 @@
   line-height: var(--lh-tight);
 }
 
+/* The shield paints its own blue, so there's no currentColor to set here. */
 .lockupMark {
-  color: var(--c-primary-text);
   flex: none;
 }
 

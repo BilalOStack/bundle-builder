@@ -47,16 +47,18 @@ export function AccordionStep({ step, isOpen, totalSteps }: AccordionStepProps) 
           </span>
 
           <span className={styles.state}>
-            {/* The design only shows the count on the expanded step. */}
-            {isOpen && <span>{selectedCount} selected</span>}
+            {/*
+              The count rides every step, open or collapsed, as the mobile
+              frame shows. Being visible, it's part of the button's accessible
+              name already — aria-expanded carries the open/closed state, so
+              there's no visually-hidden duplicate to announce it twice.
+            */}
+            <span>{selectedCount} selected</span>
             <Icon
               name="chevron"
               size={16}
               className={[styles.chevron, isOpen ? styles.chevronUp : ''].filter(Boolean).join(' ')}
             />
-            <span className="visuallyHidden">
-              {`, ${selectedCount} selected, ${isOpen ? 'expanded' : 'collapsed'}`}
-            </span>
           </span>
         </button>
       </h2>
